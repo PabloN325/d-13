@@ -10,6 +10,19 @@
         <h3>
             {{$tipo}}
         </h3>
+
+        {{-- Esto es un comentario
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        --}}
+
         <form action="validar-contacto" method="POST">
             @csrf
             <label for="correo">Correo</label><br>
@@ -23,12 +36,21 @@
                 @endif
                 >
             <br>
-            </label><br>
+            </label>
+
+            @error('correo')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror<br>
+
             <label for="comentario">Comentario</label><br>
             <textarea name="comentario" cols="30" rows="10">
-
             </textarea><br>
-            <input type="submit" value="Enviar">
+
+            @error('comentario')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+            <br><input type="submit" value="Enviar">
         </form>
     </body>
 </html>
